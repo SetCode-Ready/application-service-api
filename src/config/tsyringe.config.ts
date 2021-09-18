@@ -4,6 +4,4 @@ import { ServiceRepositoryImpl } from '../repositories/implementations/ServiceRe
 import { ServiceRepository } from '../repositories/ServiceRepository';
 
 container.registerSingleton<ServiceRepository>('ServiceRepositoryImpl', ServiceRepositoryImpl);
-container.register("ServiceController", {
-    useClass: ServiceController
-});
+container.register("ServiceController", { useClass: ServiceController });

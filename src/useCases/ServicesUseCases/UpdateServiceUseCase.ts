@@ -4,13 +4,14 @@ import { Service } from "../../entities/Service";
 import { ServiceRepository } from "../../repositories/ServiceRepository";
 
 @injectable()
-export class CreateServiceUseCase {
+export class UpdateServiceUseCase {
     constructor(@inject("ServiceRepositoryImpl") private servicesRepository: ServiceRepository) {};
 
-    async execute(data: ServiceRequest) {
-        console.log(data);
+    async execute(id: string, data: ServiceRequest) {
         const service = new Service(data);
 
-        await this.servicesRepository.save(service);
+        const services = await this.servicesRepository.updateById(id, service);
+
+        return services;
     }
 }

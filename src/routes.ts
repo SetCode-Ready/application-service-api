@@ -14,4 +14,8 @@ router.post('/service', (request: Request, response: Response) => {
     return serviceController.create(request, response);
 });
 
+router.put('/service/:id', (request: Request, response: Response) => {
+    return serviceController.updateById(request, response);
+});
+
 export { router };

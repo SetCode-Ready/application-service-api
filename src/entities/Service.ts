@@ -1,22 +1,32 @@
 import { v4 as uuid } from "uuid";
-import { ServiceStatusEnum } from "./enum/ServiceStatusEnum";
+import { ServiceRequest } from "./dto/ServiceRequest";
 
 export class Service {
     id: string;
     title: string;
     description: string;
     budget: number;
-    creationDate: string;
-    limitDate: string;
-    status: ServiceStatusEnum = ServiceStatusEnum.OPEN;
+    creationDate: Date;
+    limitDate: Date;
+    status: string;
     comments: string;
 
-    constructor(props: Omit<Service, 'id'>, id?: string) {
-        Object.assign(this, props);
-
-        if (!id) {
+    constructor(props: ServiceRequest) {
+        if (!this.id) {
             this.id = uuid();
         }
+
+        this.title = props.title;
+        this.description = props.description;
+        this.budget = props.budget;
+        this.limitDate = props.limitDate;
+        this.creationDate = new Date();
+        this.status = props.status || 'Open';
+        this.comments = props.comments;
+    }
+
+    static parseToSave(service: Service) {
+        return JSON.parse(JSON.stringify(service)) as FirebaseFirestore.DocumentData;
     }
 }
 
