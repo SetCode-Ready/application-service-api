@@ -45,11 +45,13 @@ export class ServiceController {
         } = request.body;
 
         try {
+            const limitDateParsed = new Date(limitDate);
+
             await this.createServiceUseCase.execute({
                 title,
                 description,
                 budget,
-                limitDate,
+                limitDate: limitDateParsed,
                 status,
                 comments,
             });
