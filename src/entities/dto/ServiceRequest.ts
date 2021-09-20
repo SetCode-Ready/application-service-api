@@ -2,7 +2,7 @@ export interface ServiceRequest {
     title: string;
     description: string;
     budget: number;
-    limitDate: Date;
+    limitDate: string;
     status?: string;
     comments?: string; 
 }

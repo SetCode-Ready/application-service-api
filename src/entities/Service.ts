@@ -6,8 +6,8 @@ export class Service {
     title: string;
     description: string;
     budget: number;
-    creationDate: Date;
-    limitDate: Date;
+    creationDate: string;
+    limitDate: string;
     status: string;
     comments: string;
 
@@ -20,7 +20,7 @@ export class Service {
         this.description = props.description;
         this.budget = props.budget;
         this.limitDate = props.limitDate;
-        this.creationDate = new Date();
+        this.creationDate = new Date().toISOString();
         this.status = props.status || 'Open';
         this.comments = props.comments;
     }
