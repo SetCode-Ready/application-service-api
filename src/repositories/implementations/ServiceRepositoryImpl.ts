@@ -7,9 +7,9 @@ export class ServiceRepositoryImpl implements ServiceRepository {
     async findAll(): Promise<Service[]> {
         const servicesRef = db.collection('services');
 
-        const servicesDoc = await servicesRef.get();
+        const servicesDoc = await servicesRef.orderBy('creationDate', 'desc').get();
 
-        const services = servicesDoc.docs.map(doc => ({ ...doc.data() }));
+        const services = servicesDoc.docs.map(doc => ({ ...doc.data() })).sort();
 
         return services as Service[];
     }
