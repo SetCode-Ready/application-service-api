@@ -1,13 +1,15 @@
 import { Request, Response } from "express"
 import { container, injectable } from "tsyringe";
 import { CreateServiceUseCase } from "../useCases/ServicesUseCases/CreateServiceUseCase";
+import { GetServiceByIdUseCase } from "../useCases/ServicesUseCases/GetServiceByIdUseCase";
 import { GetServicesUseCase } from "../useCases/ServicesUseCases/GetServicesUseCase";
 import { UpdateServiceUseCase } from "../useCases/ServicesUseCases/UpdateServiceUseCase";
 
 @injectable()
 export class ServiceController {
-    private createServiceUseCase = container.resolve(CreateServiceUseCase);
     private getServicesUseCase = container.resolve(GetServicesUseCase);
+    private getServiceByIdeUseCase = container.resolve(GetServiceByIdUseCase);
+    private createServiceUseCase = container.resolve(CreateServiceUseCase);
     private updateServiceUseCase = container.resolve(UpdateServiceUseCase);
 
     async findAll(request: Request, response: Response): Promise<Response> {
@@ -17,6 +19,18 @@ export class ServiceController {
             return response.status(200).json({ services });
         } catch (err) {
             return response.status(400).json({ message: err.message || 'Unexpected error on get services.' });
+        }
+    }
+
+    async findById(request: Request, response: Response): Promise<Response> {
+        try {
+            const { id } = request.params;
+
+            const service = await this.getServiceByIdeUseCase.execute(id);
+
+            return response.status(200).json({ service });
+        } catch (err) {
+            return response.status(400).json({ message: err.message || 'Unexpected error on get service.' });
         }
     }
     

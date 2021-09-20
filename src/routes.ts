@@ -10,6 +10,10 @@ router.get('/service', (request: Request, response: Response) => {
     return serviceController.findAll(request, response);
 });
 
+router.get('/service/:id', (request: Request, response: Response) => {
+    return serviceController.findById(request, response);
+});
+
 router.post('/service', (request: Request, response: Response) => {
     return serviceController.create(request, response);
 });
