@@ -66,7 +66,6 @@ export class ServiceController {
             title,
             description,
             budget,
-            creationDate,
             limitDate,
             status,
             comments,

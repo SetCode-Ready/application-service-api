@@ -71,9 +71,12 @@ export class ServiceRepositoryImpl implements ServiceRepository {
         const existingService = await this.findById(id);
 
         if (existingService !== null) {
+            delete existingService.docId;
+            delete existingService.id;
+
             const newService = JSON.parse(JSON.stringify(service));
 
-            await db.collection('services').doc(existingService.id).update(newService);
+            await db.collection('services').doc(id).set(newService);
         }
 
     }
