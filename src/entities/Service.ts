@@ -24,9 +24,5 @@ export class Service {
         this.status = props.status || 'Open';
         this.comments = props.comments;
     }
-
-    static parseToSave(service: Service) {
-        return JSON.parse(JSON.stringify(service)) as FirebaseFirestore.DocumentData;
-    }
 }
 
