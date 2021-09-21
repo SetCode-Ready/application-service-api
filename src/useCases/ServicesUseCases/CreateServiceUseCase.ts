@@ -8,7 +8,6 @@ export class CreateServiceUseCase {
     constructor(@inject("ServiceRepositoryImpl") private servicesRepository: ServiceRepository) {};
 
     async execute(data: ServiceRequest) {
-        console.log(data);
         const service = new Service(data);
 
         await this.servicesRepository.save(service);

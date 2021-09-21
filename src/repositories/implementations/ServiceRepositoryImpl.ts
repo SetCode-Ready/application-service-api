@@ -31,7 +31,7 @@ export class ServiceRepositoryImpl implements ServiceRepository {
     async save(service: Service): Promise<void> {
         const newService = Service.parseToSave(service);
 
-        await db.collection('services').doc(service.id).set(newService);
+        await db.collection('services').doc(newService.id).set(newService);
     }
 
     async updateById(id: string, service: Service): Promise<void> {
